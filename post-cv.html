@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Carea Link</title>
+  <link rel="icon" href="images/favicon.ico">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/024526c3f6.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+  <link href="css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script>
+    class CustomSelect {
+  constructor(originalSelect) {
+    this.originalSelect = originalSelect;
+    this.customSelect = document.createElement("div");
+    this.customSelect.classList.add("select");
+
+    this.originalSelect.querySelectorAll("option").forEach((optionElement) => {
+      const itemElement = document.createElement("div");
+
+      itemElement.classList.add("select__item");
+      itemElement.textContent = optionElement.textContent;
+      this.customSelect.appendChild(itemElement);
+
+      if (optionElement.selected) {
+        this._select(itemElement);
+      }
+
+      itemElement.addEventListener("click", () => {
+        if (
+          this.originalSelect.multiple &&
+          itemElement.classList.contains("select__item--selected")
+        ) {
+          this._deselect(itemElement);
+        } else {
+          this._select(itemElement);
+        }
+      });
+    });
+
+    this.originalSelect.insertAdjacentElement("afterend", this.customSelect);
+    this.originalSelect.style.display = "none";
+  }
+
+  _select(itemElement) {
+    const index = Array.from(this.customSelect.children).indexOf(itemElement);
+
+    if (!this.originalSelect.multiple) {
+      this.customSelect.querySelectorAll(".select__item").forEach((el) => {
+        el.classList.remove("select__item--selected");
+      });
+    }
+
+    this.originalSelect.querySelectorAll("option")[index].selected = true;
+    itemElement.classList.add("select__item--selected");
+  }
+
+  _deselect(itemElement) {
+    const index = Array.from(this.customSelect.children).indexOf(itemElement);
+
+    this.originalSelect.querySelectorAll("option")[index].selected = false;
+    itemElement.classList.remove("select__item--selected");
+  }
+}
+
+document.querySelectorAll(".custom-select").forEach((selectElement) => {
+  new CustomSelect(selectElement);
+});
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-bar dash-p" aria-label="Sixth navbar example">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="dashboard.html"><img src="images/tes.svg" alt="CareaLink" height="36"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsDashboard1" aria-controls="navbarsDashboard1s" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsDashboard1">
+          <form>
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+          </form>
+          <ul class="navbar-nav mx-auto mb-2 mb-xl-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Find Interships</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Applications</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown06">
+                <li><a class="dropdown-item" href="applications.html">Sent Applications</a></li>
+                <li><a class="dropdown-item" href="applications-pending.html">Pending Applications</a></li>
+                <li><a class="dropdown-item" href="applications-successful.html">Successful Applications</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Buy Credits</a>
+            </li>
+
+          </ul>
+          <div class="icon-dash"><i class="fa-regular fa-bell fa-lg"></i></div>
+          <div class="ms-3"><a href="profile.html"><img class="dash-hdr-pic" src="images/blank-profile-pic.png" alt=""></a></div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container">
+      <div class="dash-content">
+        <h3 class="pt-4 pb-2">Introduction</h3>
+        <form>
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Cover Letter</label>
+            <textarea class="form-control" id="coverLetter" rows="3"></textarea>
+          </div>
+          <br>
+          <div class="education">
+
+            <hr>
+            <h3>Education</h3>
+            <br>
+            <div class="row form-group">
+              <div class="col-lg-6 mb-3">
+                <label for="nameOfInstitution" class="form-label">Name of Institution</label>
+                <input type="text" class="form-control" id="nameOfInstitution" placeholder="School">
+              </div>
+              <div class="col-lg-6 mb-3">
+                <label for="qualification" class="form-label">Qualification</label>
+                <input type="text" class="form-control" id="qualification" placeholder="BSC, BA, Diploma">
+              </div>
+            </div>
+            <div class="row form-group">
+              <label for="date" class="col-sm-2 col-form-label">End Date</label>
+              <div class="col-sm-4">
+                <div class="input-group date" id="endDateQualification">
+                  <input type="text" class="form-control">
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="education1">
+            <button onClick="loadQualification()" class="btn btn-primary" type="button">Add Qualification</button>
+          </div>
+          <br>
+          <hr>
+          <div class="work-experience">
+            <h3>Work Experience</h3>
+            <p>Most recent job first</p>
+            <br>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="current-work">
+              <label class="form-check-label" for="same-address">Currently working here</label>
+
+            </div>
+            <br>
+            <div class="row form-group">
+              <label for="date" class="col-sm-2 col-form-label">Start Date</label>
+              <div class="col-sm-4">
+                <div class="input-group date" id="startDate">
+                  <input type="text" class="form-control">
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <label for="date" class="col-sm-2 col-form-label">End Date</label>
+              <div class="col-sm-4">
+                <div class="input-group date" id="endDate">
+                  <input type="text" class="form-control">
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="col-lg-6 mb-3">
+              <label for="nameOfInstitution" class="form-label">Job Title</label>
+              <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Job Description</label>
+              <textarea class="form-control" id="job-description" rows="3"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="work-experience1">
+            <button onClick="loadExperience()" class="btn btn-primary" type="button">Add Experience</button>
+          </div>
+          <br>
+          <hr>
+      <div class="row mb-3">
+                        <label class="col-form-label col-sm-2">BsMultiSelect</label>
+                        <div class="col-sm-10">
+                            <select name="language" class="custom-select" multiple>
+  <option value="html">HTML</option>
+  <option value="css">CSS</option>
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="sql">SQL</option>
+  <option value="kotlin">Kotlin</option>
+</select>
+                        </div>
+                    </div>
+          <br>
+          <hr>
+          <h3>Upload Your C.V.</h3>
+          <p> Word or pdf format only.</p>
+          <div class="input-group mb-3">
+            <input type="file" class="form-control" id="cvUpload">
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="container-footer">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+
+        <div class="col-4 offset-1">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of whats new and exciting from us.</p>
+            <div class="d-flex w-100 gap-2">
+              <label for="newsletter1" class="visually-hidden">Email address</label>
+              <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+              <button class="btn btn-outline-light" type="button">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between py-4 my-4 border-top">
+        <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+        <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-light" href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          <li class="ms-3"><a class="link-light" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li class="ms-3"><a class="link-light" href="#"><i class="fa-brands fa-twitter"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
